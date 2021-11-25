@@ -1,43 +1,53 @@
 ﻿@model IEnumerable<school_management.Models.Students>
+@using school_management.Models
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Estudiantes";
+    List<StudentsDetail> studentDetailedList = (List<StudentsDetail>) ViewBag.studentDetailedList;
 }
 
-<h2>Index</h2>
+<h2>Estudiantes registrados</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo estudiante", "Create", "Students", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.studentname)
+            Código
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.courseyear)
+            Nombre
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idUser)
+            Año de curso
         </th>
-        <th></th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (StudentsDetail sd in studentDetailedList) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.studentname)
+            @sd.username
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.courseyear)
+            @sd.studentname
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idUser)
+            @sd.courseyear
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @sd.userstatus
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=sd.id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=sd.id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=sd.id })
         </td>
     </tr>
 }

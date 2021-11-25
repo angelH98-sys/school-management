@@ -19,7 +19,35 @@ namespace school_management.Controllers
         // GET: Students
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            List<Students> studentList = db.Students.ToList();
+            List<StudentsDetail> studentDetailedList = new List<StudentsDetail>();
+
+            StudentsDetail sd;
+            foreach (Students s in studentList) {
+
+                sd = new StudentsDetail();
+
+                sd.courseyear = s.courseyear;
+                sd.id = s.id;
+                sd.idUser = s.idUser;
+                sd.studentname = s.studentname;
+
+                Users user = db.Users.Where(u => u.id.Equals(s.idUser)).First();
+                sd.username = user.username;
+                if (user.userstatus.Equals("Active")) {
+
+                    sd.userstatus = "Activo";
+                }
+                else {
+
+                    sd.userstatus = "Inactivo";
+                }
+
+                studentDetailedList.Add(sd);
+            }
+
+            ViewBag.studentDetailedList = studentDetailedList;
+            return View();
         }
 
         // GET: Students/Details/5
