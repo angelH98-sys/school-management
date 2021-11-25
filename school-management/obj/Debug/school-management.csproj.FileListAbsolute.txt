@@ -76,8 +76,8 @@ C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\bin
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\bin\Newtonsoft.Json.xml
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\bin\Antlr3.Runtime.pdb
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.csproj.AssemblyReference.cache
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.csproj.CoreCompileInputs.cache
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.csproj.CopyComplete
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.dll
 C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.pdb
+C:\Users\angel\source\repos\angelH98-sys\school-management\school-management\obj\Debug\school-management.csproj.AssemblyReference.cache
