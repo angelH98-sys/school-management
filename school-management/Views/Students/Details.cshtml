@@ -1,17 +1,27 @@
 ﻿@model school_management.Models.Students
+@using school_management.Models
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
+    Users user = (Users)ViewBag.user;
 }
 
-<h2>Details</h2>
+<h2>Detalles de estudiante</h2>
 
 <div>
-    <h4>Students</h4>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-primary w" })
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.studentname)
+            Código
+        </dt>
+
+        <dd>
+            @user.username
+        </dd>
+
+        <dt>
+            Nombre
         </dt>
 
         <dd>
@@ -19,24 +29,38 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.courseyear)
+            Año de curso
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.courseyear)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.idUser)
+            Correo electrónico
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.idUser)
+            @user.mail
+        </dd>
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @if (user.userstatus.Equals("Active"))
+            {
+
+                <p>Activo</p>
+
+            }
+            else
+            {
+
+                <p>Inactivo</p>
+
+            }
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
