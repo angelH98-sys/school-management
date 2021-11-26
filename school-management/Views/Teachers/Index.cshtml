@@ -1,0 +1,49 @@
+﻿@model IEnumerable<school_management.Models.Teachers>
+@using school_management.Models
+
+@{
+    ViewBag.Title = "Maestros";
+    List<TeachersDetail> teacherDetailList = (List<TeachersDetail>)ViewBag.teacherDetailList;
+}
+
+<h2>Maestros registrados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo maestro", "Create", "Teachers", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+@foreach (TeachersDetail td in teacherDetailList) {
+    <tr>
+        <td>
+            @td.code
+        </td>
+        <td>
+            @td.teachername
+        </td>
+        <td>
+            @td.status
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=td.id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=td.id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=td.id })
+        </td>
+    </tr>
+}
+
+</table>

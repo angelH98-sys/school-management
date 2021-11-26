@@ -1,0 +1,51 @@
+﻿@model school_management.Models.Teachers
+
+@{
+    ViewBag.Title = "Registro";
+}
+
+<h2>Registro de maestros</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.teachername, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.teachername, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Correo electrónico</label>
+        <div class="col-md-10">
+            <input type="text" name="mail" value="" class="form-control" />
+            @if (ViewBag.mailValidation != null)
+            {
+                <span class="field-validation-error text-danger">
+                    <span id="mail">@ViewBag.mailValidation</span>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="form-group mt-2">
+        <div class="col-md-offset-2 col-lg-1 col-md-2 col-sm-2 col-xs-3">
+            <input type="submit" value="Registrar" class="btn btn-primary w" />
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+            @Html.ActionLink("Cancelar", "Index", "Teachers", new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
