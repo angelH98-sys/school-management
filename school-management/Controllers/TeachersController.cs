@@ -48,13 +48,15 @@ namespace school_management.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Teachers teachers = db.Teachers.Find(id);
+            Users user = db.Users.Find(teachers.idUser);
             if (teachers == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
+            ViewBag.user = user;
             return View(teachers);
         }
 
@@ -115,13 +117,18 @@ namespace school_management.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
+
             }
             Teachers teachers = db.Teachers.Find(id);
+            Users user = db.Users.Find(teachers.idUser);
             if (teachers == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
+
             }
+            ViewBag.mail = user.mail;
+            ViewBag.status = user.userstatus;
             return View(teachers);
         }
 
@@ -130,15 +137,44 @@ namespace school_management.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,teachername,idUser")] Teachers teachers)
+        public ActionResult Edit([Bind(Include = "id,teachername,idUser")] Teachers teachers, string mail, string status)
         {
-            if (ModelState.IsValid)
+            ViewBag.mail = mail;
+            ViewBag.status = status;
+            try
             {
-                db.Entry(teachers).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                MailAddress m = new MailAddress(mail);
+
+                Users user = db.Users.Find(teachers.idUser);
+                bool isUniqueMail = db.Users.Where(u => u.mail.Equals(mail))
+                                            .Where(u => u.userstatus.Equals("Active"))
+                                            .Where(u => u.id != teachers.idUser)
+                                            .Count() == 0;
+
+                if (isUniqueMail) {
+
+                    user.mail = mail;
+                    user.userstatus = status;
+                    db.Entry(user).State = EntityState.Modified;
+                    teachers.teachername = teachers.teachername.ToUpper();
+                    db.Entry(teachers).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Details", "Teachers", new { id = teachers.id });
+                }
+
+                ViewBag.mailValidation = "Correo electrónico no disponible";
+                return View(teachers);
             }
-            return View(teachers);
+            catch (FormatException e)
+            {
+                ViewBag.mailValidation = "Formato de correo erróneo";
+                return View(teachers);
+            }
+            catch (Exception e) {
+                return View(teachers);
+            }
         }
 
         // GET: Teachers/Delete/5

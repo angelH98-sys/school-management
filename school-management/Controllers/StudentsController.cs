@@ -55,7 +55,7 @@ namespace school_management.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Students students = db.Students.Find(id);
             Users user = db.Users.Find(students.idUser);
@@ -170,6 +170,7 @@ namespace school_management.Controllers
                     user.mail = mail;
                     user.userstatus = status;
                     db.Entry(user).State = EntityState.Modified;
+                    students.studentname = students.studentname.ToUpper();
                     db.Entry(students).State = EntityState.Modified;
                     db.SaveChanges();
 
