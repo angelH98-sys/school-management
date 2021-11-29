@@ -1,0 +1,47 @@
+﻿@model IEnumerable<school_management.Models.Courses>
+
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<h2>Cursos registrados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Curso", "Create", "Courses", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Año del curso
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.coursename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.courseyear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.coursestatus)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

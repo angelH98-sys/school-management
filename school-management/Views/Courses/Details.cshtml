@@ -1,0 +1,38 @@
+﻿@model school_management.Models.Courses
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles de curso</h2>
+
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-primary w" })
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coursename)
+        </dd>
+
+        <dt>
+            Año de curso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.courseyear)
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coursestatus)
+        </dd>
+
+    </dl>
+</div>
