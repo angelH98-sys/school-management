@@ -10,7 +10,7 @@ namespace school_management.Models
         public int id { get; set; }
         public decimal generalgrade { get; set; }
         public string inscriptionstatus { get; set; }
-        public decimal progress { get; set; }
+        public int progress { get; set; }
         public decimal avarage { get; set; }
         public int idSemester { get; set; }
         public int idCourse { get; set; }

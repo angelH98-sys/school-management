@@ -34,7 +34,7 @@ courseyear INT
 CREATE TABLE assignments(
 id INT PRIMARY KEY IDENTITY(1,1),
 assignmentname VARCHAR(20),
-coursevalue DECIMAL(2,2),
+coursevalue INT,
 assignmentstatus VARCHAR(10),
 idCourse INT FOREIGN KEY REFERENCES courses(id)
 );
@@ -49,18 +49,18 @@ idCourse INT FOREIGN KEY REFERENCES courses(id)
 CREATE TABLE semesters(
 id INT PRIMARY KEY IDENTITY(1,1),
 semesterstatus VARCHAR(10),
-avarage DECIMAL(2,2),
-progress DECIMAL(3,2),
+avarage DECIMAL(4,2),
+progress DECIMAL(5,2),
 enrolleddate DATE,
 idStudent INT FOREIGN KEY REFERENCES students(id)
 );
 
 CREATE TABLE inscriptions(
 id INT PRIMARY KEY IDENTITY(1,1),
-generalgrade DECIMAL(2,2),
+generalgrade DECIMAL(4,2),
 inscriptionstatus VARCHAR(10),
-progress DECIMAL(3,2),
-avarage DECIMAL(2,2),
+progress INT,
+avarage DECIMAL(4,2),
 idSemester INT FOREIGN KEY REFERENCES semesters(id),
 idCourse INT FOREIGN KEY REFERENCES courses(id),
 idTeacher INT
@@ -68,8 +68,8 @@ idTeacher INT
 
 CREATE TABLE grades(
 id INT PRIMARY KEY IDENTITY(1,1),
-grade DECIMAL(2,2),
-gradevalue DECIMAL(2,2),
+grade DECIMAL(4,2),
+gradevalue DECIMAL(5,2),
 idAssignment INT,
 idInscription INT FOREIGN KEY REFERENCES inscriptions(id)
 );

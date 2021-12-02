@@ -1,0 +1,70 @@
+﻿@model school_management.Models.Assignments
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar asignación</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Assignments</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.idCourse)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nombre</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.assignmentname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.assignmentname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Valor del curso (%)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.coursevalue, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @max = "100", @step = "1" } })
+                @Html.ValidationMessageFor(model => model.coursevalue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                <select class="form-select" aria-label="Default select example" name="status">
+                    @if (Model.assignmentstatus.Equals("Active"))
+                    {
+
+                        <option value="Active" selected>Activo</option>
+                        <option value="Inactive">Inactivo</option>
+                    }
+                    else
+                    {
+
+                        <option value="Active">Activo</option>
+                        <option value="Inactive" selected>Inactivo</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                <input type="submit" value="Registrar" class="btn btn-primary w" />
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                @Html.ActionLink("Cancelar", "Details", "Courses", new { id = Model.idCourse}, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
