@@ -63,6 +63,7 @@ namespace school_management.Controllers
         // GET: Teachers/Create
         public ActionResult Create()
         {
+            ViewBag.courseList = db.Courses.Where(c => c.coursestatus.Equals("Active")).ToList();
             return View();
         }
 
@@ -71,7 +72,7 @@ namespace school_management.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,teachername,idUser")] Teachers teachers, string mail)
+        public ActionResult Create([Bind(Include = "id,teachername,idUser")] Teachers teachers, string mail, int? courseId)
         {
 
             try
@@ -95,19 +96,32 @@ namespace school_management.Controllers
                     db.Teachers.Add(teachers);
                     db.SaveChanges();
 
+                    if (courseId != null) {
+                        TeachersEnrolleds te = new TeachersEnrolleds();
+                        te.idCourse = (int) courseId;
+                        te.idTeacher = teachers.id;
+                        te.enrolledstatus = "Active";
+
+                        db.TeachersEnrolleds.Add(te);
+                        db.SaveChanges();
+                    }
+
                     return RedirectToAction("Details", new { id = teachers.id });
                 }
 
+                ViewBag.courseList = db.Courses.Where(c => c.coursestatus.Equals("Active")).ToList();
                 ViewBag.mailValidation = "Correo electrónico no disponible";
                 return View(teachers);
             }
             catch (FormatException e)
             {
+                ViewBag.courseList = db.Courses.Where(c => c.coursestatus.Equals("Active")).ToList();
                 ViewBag.mailValidation = "Formato de correo erróneo";
                 return View(teachers);
             }
-            catch (Exception e) { 
+            catch (Exception e) {
 
+                ViewBag.courseList = db.Courses.Where(c => c.coursestatus.Equals("Active")).ToList();
                 return View(teachers);
             }
         }

@@ -1,7 +1,10 @@
 ﻿@model school_management.Models.Teachers
+@using school_management.Models
 
 @{
     ViewBag.Title = "Maestros";
+
+    List<Courses> courseList = (List<Courses>) ViewBag.courseList;
 }
 
 <h2>Registro de maestros</h2>
@@ -34,6 +37,31 @@
             }
         </div>
     </div>
+
+    @if (courseList.Count() > 0) {
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Curso asignado</label>
+            <div class="col-md-10">
+                <select class="form-select" aria-label="Default select example" name="courseId">
+
+                    @for (int i = 0; i < courseList.Count(); i++)
+                    {
+                        if (i.Equals(0))
+                        {
+
+                            <option value="@courseList[i].id" selected>@courseList[i].coursename</option>
+                        }
+                        else
+                        {
+                            <option value="@courseList[i].id">@courseList[i].coursename</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+    }
 
     <div class="form-group mt-2">
         <div class="col-md-offset-2 col-lg-1 col-md-2 col-sm-2 col-xs-3">

@@ -39,7 +39,7 @@ assignmentstatus VARCHAR(10),
 idCourse INT FOREIGN KEY REFERENCES courses(id)
 );
 
-CREATE TABLE teachersenrolled(
+CREATE TABLE teachersenrolleds(
 id INT PRIMARY KEY IDENTITY(1,1),
 enrolledstatus VARCHAR(10),
 idTeacher INT,

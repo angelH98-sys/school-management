@@ -131,6 +131,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="Controllers\TeachersEnrolledsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,7 +142,7 @@
     <Compile Include="Models\SchoolManagementDBContext.cs" />
     <Compile Include="Models\Semesters.cs" />
     <Compile Include="Models\Students.cs" />
-    <Compile Include="Models\TeacherEnrolled.cs" />
+    <Compile Include="Models\TeachersEnrolleds.cs" />
     <Compile Include="Models\Teachers.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,6 +203,12 @@
     <Content Include="Views\Assignments\Details.cshtml" />
     <Content Include="Views\Assignments\Edit.cshtml" />
     <Content Include="Views\Assignments\Index.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\Create.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\Delete.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\Details.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\Edit.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\Index.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\IndexByTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

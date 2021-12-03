@@ -13,7 +13,7 @@ namespace school_management.Models
         public DbSet<Inscriptions> Inscriptions { get; set; }
         public DbSet<Semesters> Semesters { get; set; }
         public DbSet<Students> Students { get; set; }
-        public DbSet<TeacherEnrolled> TeacherEnrolled { get; set; }
+        public DbSet<TeachersEnrolleds> TeachersEnrolleds { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
         public DbSet<Users> Users { get; set; }
     }
