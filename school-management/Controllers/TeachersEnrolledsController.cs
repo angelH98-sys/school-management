@@ -28,7 +28,6 @@ namespace school_management.Controllers
                 List<TeachersEnrolledsDetail> teacherEnrolledDetailList = new List<TeachersEnrolledsDetail>();
                 TeachersEnrolledsDetail te;
 
-
                 foreach (TeachersEnrolleds item in teacherEnrolledList)
                 {
                     te = new TeachersEnrolledsDetail();
@@ -43,7 +42,9 @@ namespace school_management.Controllers
                     teacherEnrolledDetailList.Add(te);
                 }
 
+                ViewBag.teacherId = (int)id;
                 ViewBag.teacherEnrolledList = teacherEnrolledDetailList;
+                
                 return PartialView();
             }
             else 
@@ -56,14 +57,19 @@ namespace school_management.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                return RedirectToAction("Index", "Home");
+
             TeachersEnrolleds teachersEnrolleds = db.TeachersEnrolleds.Find(id);
+
             if (teachersEnrolleds == null)
-            {
-                return HttpNotFound();
-            }
+                return RedirectToAction("Index", "Home");
+
+            Teachers teacher = db.Teachers.Find(teachersEnrolleds.idTeacher);
+
+            ViewBag.teachername = teacher.teachername;
+            ViewBag.teachercode = db.Users.Where(u => u.id.Equals(teacher.idUser)).First().username;
+            ViewBag.coursename = db.Courses.Find(teachersEnrolleds.idCourse).coursename;
+
             return View(teachersEnrolleds);
         }
 
@@ -71,6 +77,34 @@ namespace school_management.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult CreateByTeacher(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Teachers");
+
+            TeachersEnrolleds teacherEnrolled = new TeachersEnrolleds();
+            teacherEnrolled.idTeacher = (int) id;
+
+            ViewBag.teachername = db.Teachers.Find(id).teachername;
+
+            List<Courses> allCourses = db.Courses.ToList();
+            List<TeachersEnrolleds> coursesEnrolled = db.TeachersEnrolleds.Where(te => te.idTeacher.Equals((int) id)).ToList();
+
+            List<Courses> availableCourses = new List<Courses>();
+
+            foreach (Courses c in allCourses) 
+            {
+
+                if (coursesEnrolled.Where(ce => ce.idCourse.Equals(c.id)).Count() == 0 &&
+                    c.coursestatus.Equals("Active"))
+                    availableCourses.Add(c);
+
+            }
+
+            ViewBag.availableCourses = availableCourses;
+            return View(teacherEnrolled);
         }
 
         // POST: TeachersEnrolleds/Create
@@ -88,6 +122,19 @@ namespace school_management.Controllers
             }
 
             return View(teachersEnrolleds);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateByTeacher([Bind(Include = "id,enrolledstatus,idTeacher,idCourse")] TeachersEnrolleds teachersEnrolleds, int courseId)
+        {
+            teachersEnrolleds.enrolledstatus = "Active";
+            teachersEnrolleds.idCourse = courseId;
+
+            db.TeachersEnrolleds.Add(teachersEnrolleds);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Teachers", new { id = teachersEnrolleds.idTeacher});
         }
 
         // GET: TeachersEnrolleds/Edit/5

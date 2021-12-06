@@ -209,6 +209,7 @@
     <Content Include="Views\TeachersEnrolleds\Edit.cshtml" />
     <Content Include="Views\TeachersEnrolleds\Index.cshtml" />
     <Content Include="Views\TeachersEnrolleds\IndexByTeacher.cshtml" />
+    <Content Include="Views\TeachersEnrolleds\CreateByTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,7 @@
 <h2>Cursos asignados</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo curso", "CreateByTeacher", "TeachersEnrolleds", new { id = ViewBag.teacherId }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -33,7 +33,6 @@
                 @Html.DisplayFor(modelItem => item.enrolledstatus)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
             </td>

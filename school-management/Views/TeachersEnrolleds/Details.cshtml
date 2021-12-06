@@ -1,42 +1,44 @@
 ﻿@model school_management.Models.TeachersEnrolleds
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detalle de registro de maestro</h2>
 
 <div>
-    <h4>TeachersEnrolleds</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.enrolledstatus)
+            Código de maestro
+        </dt>
+
+        <dd>
+            @ViewBag.teachercode
+        </dd>
+        <dt>
+            Nombre del maestro
+        </dt>
+
+        <dd>
+            @ViewBag.teachername
+        </dd>
+
+        <dt>
+            Curso
+        </dt>
+
+        <dd>
+            @ViewBag.coursename
+        </dd>
+
+        <dt>
+            Estado
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.enrolledstatus)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.idTeacher)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idTeacher)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.idCourse)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idCourse)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
