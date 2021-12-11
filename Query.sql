@@ -46,22 +46,13 @@ idTeacher INT,
 idCourse INT FOREIGN KEY REFERENCES courses(id)
 );
 
-CREATE TABLE semesters(
-id INT PRIMARY KEY IDENTITY(1,1),
-semesterstatus VARCHAR(10),
-avarage DECIMAL(4,2),
-progress DECIMAL(5,2),
-enrolleddate DATE,
-idStudent INT FOREIGN KEY REFERENCES students(id)
-);
-
 CREATE TABLE inscriptions(
 id INT PRIMARY KEY IDENTITY(1,1),
 generalgrade DECIMAL(4,2),
 inscriptionstatus VARCHAR(10),
 progress INT,
 avarage DECIMAL(4,2),
-idSemester INT FOREIGN KEY REFERENCES semesters(id),
+idStudent INT FOREIGN KEY REFERENCES students(id),
 idCourse INT FOREIGN KEY REFERENCES courses(id),
 idTeacher INT
 );

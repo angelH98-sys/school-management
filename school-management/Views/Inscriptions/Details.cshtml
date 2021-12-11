@@ -1,0 +1,68 @@
+﻿@model school_management.Models.Inscriptions
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    @Html.ActionLink("Editar", "EditByStudent", new { id = Model.id }, new { @class = "btn btn-primary w" })
+
+    <h4>Inscriptions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Estudiante
+        </dt>
+
+        <dd>
+            @ViewBag.studentname
+        </dd>
+        <dt>
+            Curso
+        </dt>
+
+        <dd>
+            @ViewBag.coursename
+        </dd>
+        <dt>
+            Maestro
+        </dt>
+
+        <dd>
+            @ViewBag.teachername
+        </dd>
+        <dt>
+            Acumulado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalgrade)
+        </dd>
+
+        <dt>
+            Progreso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.progress)
+        </dd>
+
+        <dt>
+            Promedio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.avarage)
+        </dd>
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inscriptionstatus)
+        </dd>
+
+    </dl>
+</div>

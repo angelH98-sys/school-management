@@ -1,0 +1,72 @@
+﻿@model school_management.Models.Inscriptions
+@using school_management.Models
+
+@{
+    ViewBag.Title = "Editar";
+    List<SelectListItem> teacherAvailable = (List<SelectListItem>)ViewBag.teacherAvailable;
+
+    List<SelectListItem> statusOptions = new List<SelectListItem>();
+    statusOptions.Add(new SelectListItem { Text = "Activo", Value = "Active" });
+    statusOptions.Add(new SelectListItem { Text = "Inactivo", Value = "Inactive" });
+}
+
+<h2>Editar inscripción</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Estudiante 
+        </dt>
+
+        <dd>
+            @ViewBag.studentname
+        </dd>
+        <dt>
+            Curso 
+        </dt>
+
+        <dd>
+            @ViewBag.coursename
+        </dd>
+    </dl>
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.idStudent)
+        @Html.HiddenFor(model => model.idCourse)
+        @Html.HiddenFor(model => model.progress)
+        @Html.HiddenFor(model => model.avarage)
+        @Html.HiddenFor(model => model.generalgrade)
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Maestro asignado</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.idTeacher, teacherAvailable, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idTeacher, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.inscriptionstatus, statusOptions, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.inscriptionstatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                <input type="submit" value="Registrar" class="btn btn-primary w" />
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                @Html.ActionLink("Cancelar", "Details", "Students", new { id = Model.idStudent }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<school_management.Models.Inscriptions>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.generalgrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inscriptionstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.progress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.avarage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idSemester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCourse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idTeacher)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.generalgrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inscriptionstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.progress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.avarage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idSemester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCourse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idTeacher)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

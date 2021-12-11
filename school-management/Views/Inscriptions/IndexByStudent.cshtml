@@ -1,0 +1,67 @@
+﻿@model IEnumerable<school_management.Models.Inscriptions>
+@using school_management.Models
+
+@{
+    List<InscriptionDetail> inscriptionDetailList = (List<InscriptionDetail>)ViewBag.inscriptionDetailList;
+ }
+
+<h2>Cursos inscritos</h2>
+
+<p>
+    @Html.ActionLink("Nueva inscripcion", "CreateByStudent", "Inscriptions",new { id = ViewBag.idStudent }, new { @class="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Curso
+        </th>
+        <th>
+            Maestro
+        </th>
+        <th>
+            Avance
+        </th>
+        <th>
+            Promedio
+        </th>
+        <th>
+            Acumulado
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+    @foreach (InscriptionDetail i in inscriptionDetailList)
+    {
+        <tr>
+            <td>
+                @i.coursename
+            </td>
+            <td>
+                @i.teachername
+            </td>
+            <td>
+                @i.progress
+            </td>
+            <td>
+                @i.avarage
+            </td>
+            <td>
+                @i.generalgrade
+            </td>
+            <td>
+                @i.inscriptionstatus
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditByStudent", new { id = i.id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = i.id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = i.id })
+            </td>
+        </tr>
+    }
+
+</table>

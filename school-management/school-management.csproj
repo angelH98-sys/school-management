@@ -129,6 +129,7 @@
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscriptionsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\TeachersEnrolledsController.cs" />
@@ -140,7 +141,6 @@
     <Compile Include="Models\Grades.cs" />
     <Compile Include="Models\Inscriptions.cs" />
     <Compile Include="Models\SchoolManagementDBContext.cs" />
-    <Compile Include="Models\Semesters.cs" />
     <Compile Include="Models\Students.cs" />
     <Compile Include="Models\TeachersEnrolleds.cs" />
     <Compile Include="Models\Teachers.cs" />
@@ -210,6 +210,14 @@
     <Content Include="Views\TeachersEnrolleds\Index.cshtml" />
     <Content Include="Views\TeachersEnrolleds\IndexByTeacher.cshtml" />
     <Content Include="Views\TeachersEnrolleds\CreateByTeacher.cshtml" />
+    <Content Include="Views\Inscriptions\Create.cshtml" />
+    <Content Include="Views\Inscriptions\Delete.cshtml" />
+    <Content Include="Views\Inscriptions\Details.cshtml" />
+    <Content Include="Views\Inscriptions\Edit.cshtml" />
+    <Content Include="Views\Inscriptions\Index.cshtml" />
+    <Content Include="Views\Inscriptions\IndexByStudent.cshtml" />
+    <Content Include="Views\Inscriptions\CreateByStudent.cshtml" />
+    <Content Include="Views\Inscriptions\EditByStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

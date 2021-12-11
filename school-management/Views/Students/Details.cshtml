@@ -2,7 +2,7 @@
 @using school_management.Models
 
 @{
-    ViewBag.Title = "Estudiantes";
+    ViewBag.Title = "Detalles";
     Users user = (Users)ViewBag.user;
 }
 
@@ -63,4 +63,5 @@
 
     </dl>
 </div>
-
+<br />
+@Html.Action("IndexByStudent", "Inscriptions", new { id = Model.id})
