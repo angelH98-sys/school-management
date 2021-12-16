@@ -74,6 +74,46 @@ namespace school_management.Controllers
             return PartialView();
         }
 
+        public ActionResult IndexByCourseAndTeacher(int idCourse, int idTeacher)
+        {
+
+            List<InscriptionDetail> inscriptionDetailedList = new List<InscriptionDetail>();
+
+            InscriptionDetail itemDetailed;
+
+            foreach (Inscriptions item in db.Inscriptions.Where(i => i.idCourse.Equals(idCourse) && i.idTeacher.Equals(idTeacher)).ToList()) 
+            {
+
+                itemDetailed = new InscriptionDetail();
+
+                if (inscriptionDetailedList.Where(idl => idl.idStudent.Equals(item.idStudent)).Any())
+                {
+                    itemDetailed.studentname = inscriptionDetailedList.Where(idl => idl.idStudent.Equals(item.idStudent)).First().studentname;
+                    itemDetailed.studentcode = inscriptionDetailedList.Where(idl => idl.idStudent.Equals(item.idStudent)).First().studentcode;
+                }
+                else
+                {
+                    Students student = db.Students.Find(item.idStudent);
+                    itemDetailed.studentname = student.studentname;
+                    itemDetailed.studentcode = db.Users.Find(student.idUser).username;
+                }
+
+                itemDetailed.id = item.id;
+                itemDetailed.idStudent = item.idStudent;
+                itemDetailed.idTeacher = item.idTeacher;
+                itemDetailed.idCourse = item.idCourse;
+                itemDetailed.inscriptionstatus = item.inscriptionstatus;
+                itemDetailed.progress = item.progress;
+                itemDetailed.avarage = item.avarage;
+                itemDetailed.generalgrade = item.generalgrade;
+
+                inscriptionDetailedList.Add(itemDetailed);
+
+            }
+
+            return PartialView(inscriptionDetailedList);
+        }
+
         // GET: Inscriptions/Details/5
         public ActionResult Details(int? id)
         {

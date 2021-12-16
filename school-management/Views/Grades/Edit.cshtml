@@ -1,0 +1,124 @@
+﻿@model school_management.Models.Grades
+@using school_management.Models
+
+@{
+    ViewBag.Title = "Editar";
+    InscriptionDetail inscriptionDetailed = (InscriptionDetail)ViewBag.inscriptionDetailed;
+    List<SelectListItem> availableAssignments = (List<SelectListItem>)ViewBag.availableAssignments;
+}
+
+<h2>Editar nota</h2>
+
+<div class="container">
+    <hr />
+    <div class="col-lg-6">
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre del curso
+            </dt>
+            <dd>
+                @inscriptionDetailed.coursename
+            </dd>
+
+            <dt>
+                Código de maestro
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.teachercode
+            </dd>
+            <dt>
+                Nombre de maestro
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.teachername
+            </dd>
+            <dt>
+                Código del estudiante
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.studentcode
+            </dd>
+            <dt>
+                Nombre del estudiante
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.studentname
+            </dd>
+        </dl>
+    </div>
+    <div class="col-lg-6">
+        <dl class="dl-horizontal">
+
+            <dt>
+                Estado de inscripción
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.inscriptionstatus
+            </dd>
+            <dt>
+                Avance
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.progress
+            </dd>
+            <dt>
+                Promedio
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.avarage
+            </dd>
+            <dt>
+                Acumulado
+            </dt>
+
+            <dd>
+                @(inscriptionDetailed.generalgrade/10)
+            </dd>
+        </dl>
+    </div>
+</div>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.idInscription)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nota</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.grade, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0.01", @step = "0.01", @max = "10.0" } })
+                @Html.ValidationMessageFor(model => model.grade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Asignación</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.idAssignment, availableAssignments, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idAssignment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                <input type="submit" value="Registrar" class="btn btn-primary w" />
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                @Html.ActionLink("Cancelar", "Index", "Grades", new { id = Model.idInscription}, new { @class = "btn btn-danger" });
+            </div>
+        </div>
+    </div>
+}

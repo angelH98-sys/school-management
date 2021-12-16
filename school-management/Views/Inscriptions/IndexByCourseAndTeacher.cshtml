@@ -1,0 +1,58 @@
+﻿@model IEnumerable<school_management.Models.InscriptionDetail>
+@using school_management.Models
+
+<h2>Estudiantes inscritos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Avance
+        </th>
+        <th>
+            Promedio
+        </th>
+        <th>
+            Acumulado
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+    @foreach (InscriptionDetail i in Model)
+    {
+        <tr>
+            <td>
+                @i.studentcode
+            </td>
+            <td>
+                @i.studentname
+            </td>
+            <td>
+                @i.progress %
+            </td>
+            <td>
+                @i.avarage
+            </td>
+            <td>
+                @(i.generalgrade / 10)
+            </td>
+            <td>
+                @i.inscriptionstatus
+            </td>
+            <td>
+                @Html.ActionLink("Notas", "Index", "Grades", new { id = i.id }, new { })
+            </td>
+        </tr>
+    }
+
+</table>

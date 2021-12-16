@@ -1,0 +1,137 @@
+﻿@model IEnumerable<school_management.Models.GradesDetail>
+@using school_management.Models
+
+@{
+    ViewBag.Title = "Notas";
+    InscriptionDetail inscriptionDetailed = (InscriptionDetail)ViewBag.inscriptionDetailed;
+}
+
+<h2>Notas registradas</h2>
+
+<div class="container">
+    <hr />
+    <div class="col-lg-6">
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre del curso
+            </dt>
+            <dd>
+                @inscriptionDetailed.coursename
+            </dd>
+
+            <dt>
+                Código de maestro
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.teachercode
+            </dd>
+            <dt>
+                Nombre de maestro
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.teachername
+            </dd>
+            <dt>
+                Código del estudiante
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.studentcode
+            </dd>
+            <dt>
+                Nombre del estudiante
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.studentname
+            </dd>
+        </dl>
+    </div>
+    <div class="col-lg-6">
+        <dl class="dl-horizontal">
+            
+            <dt>
+                Estado de inscripción
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.inscriptionstatus
+            </dd>
+            <dt>
+                Avance
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.progress
+            </dd>
+            <dt>
+                Promedio
+            </dt>
+
+            <dd>
+                @inscriptionDetailed.avarage
+            </dd>
+            <dt>
+                Acumulado
+            </dt>
+
+            <dd>
+                @(inscriptionDetailed.generalgrade/10)
+            </dd>
+        </dl>
+    </div>
+</div>
+<br />
+<div>
+    <p>
+        @Html.ActionLink("Nueva nota", "Create", new { id = inscriptionDetailed.id }, new { @class = "btn btn-primary" })
+    </p>
+</div>
+<table class="table">
+    <tr>
+        <th rowspan="2">
+            Asignación
+        </th>
+        <th rowspan="2">
+            Nota
+        </th>
+        <th colspan="2">
+            Acumulado de asignación
+        </th>
+        <th rowspan="2">
+            Acciones
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Por nota
+        </th>
+        <th>
+            De
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.assignmentname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+        <td>
+            @Decimal.Parse((item.gradevalue / 10).ToString())
+        </td>
+        <td>
+            @Decimal.Parse((item.coursevalue / 10).ToString())
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

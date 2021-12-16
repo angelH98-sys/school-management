@@ -15,5 +15,7 @@ namespace school_management.Models
         public DbSet<TeachersEnrolleds> TeachersEnrolleds { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
         public DbSet<Users> Users { get; set; }
+
+        public System.Data.Entity.DbSet<school_management.Models.Grades> Grades { get; set; }
     }
 }
