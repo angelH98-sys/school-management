@@ -70,6 +70,7 @@ namespace school_management.Controllers
                 inscriptionDetailList.Add(item);
             }
 
+            ViewBag.coursesavailables = getCoursesAvailable((int)id).Count;
             ViewBag.inscriptionDetailList = inscriptionDetailList;
             return PartialView();
         }
@@ -313,11 +314,14 @@ namespace school_management.Controllers
 
             List<SelectListItem> coursesAvailable = new List<SelectListItem>();
 
+            List<Inscriptions> inscriptionByStudent = db.Inscriptions.Where(i => i.idStudent.Equals(idStudent)).ToList();
+
             int courseyear = db.Students.Find(idStudent).courseyear;
 
             foreach (Courses c in db.Courses.Where(co => co.coursestatus.Equals("Active") && co.courseyear.Equals(courseyear)).ToList()) 
             {
-                if (db.TeachersEnrolleds.Where(te => te.idCourse.Equals(c.id) && te.enrolledstatus.Equals("Active")).Count() > 0) 
+                if (db.TeachersEnrolleds.Where(te => te.idCourse.Equals(c.id) && te.enrolledstatus.Equals("Active")).Count() > 0 &&
+                        inscriptionByStudent.Where(i => i.idCourse.Equals(c.id)).Count() == 0) 
                 {
                     coursesAvailable.Add(new SelectListItem { Text = c.coursename, Value = c.id.ToString() });
                 }

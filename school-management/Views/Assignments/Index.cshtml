@@ -2,9 +2,13 @@
 
 <h2>Asignaciones registradas</h2>
 
-<p>
-    @Html.ActionLink("Nueva asignación", "Create", "Assignments", new { id = ViewBag.id}, new { @class = "btn btn-primary" })
-</p>
+@if ((int)ViewBag.availablepercentage > 0)
+{ 
+
+    <p>
+        @Html.ActionLink("Nueva asignación", "Create", "Assignments", new { id = ViewBag.id}, new { @class = "btn btn-primary" })
+    </p>
+}
 <table class="table">
     <tr>
         <th>

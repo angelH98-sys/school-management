@@ -18,10 +18,26 @@ namespace school_management.Controllers
         public ActionResult Index(int? id)
         {
             ViewBag.id = id;
-            if(id != null)
-                return PartialView(db.Assignments.Where(a => a.idCourse == id).ToList());
+            int availablepercentage = 100;
+            if (id != null)
+            {
+
+                List<Assignments> assignmentByCourse = db.Assignments.Where(a => a.idCourse == id).ToList();
+
+                foreach (Assignments a in assignmentByCourse) 
+                {
+                    availablepercentage -= a.coursevalue;
+                }
+
+                ViewBag.availablepercentage = availablepercentage;
+                return PartialView(assignmentByCourse);
+            }
             else
+            {
+
+                ViewBag.availablepercentage = availablepercentage;
                 return PartialView(new List<Assignments>());
+            }
         }
 
         // GET: Assignments/Details/5
